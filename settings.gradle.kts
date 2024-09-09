@@ -1,4 +1,4 @@
-rootProject.name = "Gematria"
+rootProject.name = "GematriaLib"
 
 pluginManagement {
     repositories {
