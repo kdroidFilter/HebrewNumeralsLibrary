@@ -40,7 +40,7 @@
 </div>
 
 <script>
-    // Vérifier si les fonctions sont disponibles
+    // Check if functions are available
     function checkFunctions() {
         if (typeof gematria === 'undefined' ||
             typeof gematria.com === 'undefined' ||
@@ -92,7 +92,7 @@
         }
     }
 
-    // Attendre que le DOM soit chargé avant d'ajouter les écouteurs d'événements
+    // Wait for the DOM to load before adding event listeners
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hebrewInput').addEventListener('input', updateGematria);
         document.getElementById('numberInput').addEventListener('input', updateHebrewNumeral);
