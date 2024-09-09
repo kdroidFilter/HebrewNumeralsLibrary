@@ -52,13 +52,6 @@ This library is built with Kotlin Multiplatform, allowing it to be used across d
 - JS: For use in web applications and Node.js environments
 - Native: For use in iOS, desktop, and other native applications
 
-## Exporting as Native or JS Library
-
-The library can be easily exported for use in various environments:
-
-- As a native library: Can be compiled and used in C, Objective-C, and Swift projects
-- As a JavaScript library: Can be used directly in web applications or Node.js projects
-
 ## API Reference
 
 ### `String.toGematria(): Int`
@@ -72,6 +65,13 @@ Converts an integer representing a Daf Gemara (Talmudic page) to its correspondi
 ### `Int.toHebrewNumeral(includeGeresh: Boolean = true): String`
 
 Converts an integer to its corresponding Hebrew numeral representation (Gematria).
+
+## Exporting as Native or JS Library
+
+The library can be easily exported for use in various environments:
+
+- As a native library: Can be compiled and used in C, Objective-C, and Swift projects
+- As a JavaScript library: Can be used directly in web applications or Node.js projects
 
 ### Build platform artifacts
 
