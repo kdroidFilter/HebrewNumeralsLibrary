@@ -1,9 +1,7 @@
 package com.kdroid.gematria.converter
 
-import com.kdroid.gematria.utils.GERESH
-import com.kdroid.gematria.utils.GERSHAYIM
 import com.kdroid.gematria.utils.isHebrewLetter
-import com.kdroid.gematria.utils.numFromHeb
+import com.kdroid.gematria.utils.numberFromHebrew
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
@@ -32,12 +30,12 @@ fun String.toGematria(): Int {
         val currentChar = char.toString()
 
         // Ignore spaces and other non-Hebrew characters
-        if (currentChar == GERESH || currentChar == GERSHAYIM || currentChar.isBlank() || !isHebrewLetter(currentChar)) {
+        if (!isHebrewLetter(currentChar)) {
             continue
         }
 
         // Convert Hebrew character to number
-        val hebNum = numFromHeb(currentChar)
+        val hebNum = numberFromHebrew(currentChar)
 
         number += hebNum
     }

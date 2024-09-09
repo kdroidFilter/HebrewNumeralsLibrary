@@ -2,7 +2,7 @@ package com.kdroid.gematria.converter
 
 import com.kdroid.gematria.utils.GERESH
 import com.kdroid.gematria.utils.GERSHAYIM
-import com.kdroid.gematria.utils.num2heb
+import com.kdroid.gematria.utils.numberToHebrew
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
@@ -32,24 +32,30 @@ private fun num2digits(number: Int): List<Int> {
 /**
  * Converts an integer to its corresponding Hebrew numeral representation (Gematria).
  *
- * This function is defined as an extension on the `Int` type and converts the integer
- * to a string of Hebrew letters. It handles years in the Hebrew calendar within the
- * current millennium, omitting the thousands digit. For example, for the year 5784,
- * the result will be "תשפ"ד" (without the thousands digit).
+ * This function converts the integer to a string of Hebrew letters. It handles years in the Hebrew calendar within the
+ * current millennium, omitting the thousands digit if necessary. The function can include or exclude the `GERESH` and
+ * `GERSHAYIM` symbols based on the `includeGeresh` parameter.
  *
  * @receiver Int The numerical value to convert. It must be a non-negative integer.
- * @return A string representing the Hebrew numeral (Gematria) equivalent of the integer.
+ * @param includeGeresh A Boolean flag that determines whether to include the `GERESH` (׳) and `GERSHAYIM` (״) symbols in the output.
+ *                       Default is `true`, meaning these symbols will be included.
+ * @return A string representing the Hebrew numeral (Gematria) equivalent of the integer. The result may include or exclude
+ *         the `GERESH` and `GERSHAYIM` symbols based on the `includeGeresh` parameter.
  *
  * @throws IllegalArgumentException If the integer is negative.
  *
  * @sample
- * // Example usage:
- * val result = 5784.toHebrewNumeral()
- * println(result) // Outputs "תשפ"ד"
+ * // Example usage with symbols:
+ * val resultWithSymbols = 5784.toHebrewNumeral()
+ * println(resultWithSymbols) // Outputs "תשפ"ד"
+ *
+ * // Example usage without symbols:
+ * val resultWithoutSymbols = 5784.toHebrewNumeral(false)
+ * println(resultWithoutSymbols) // Outputs "תשפד"
  */
 @OptIn(ExperimentalJsExport::class)
 @JsExport
-fun Int.toHebrewNumeral(): String {
+fun Int.toHebrewNumeral(includeGeresh: Boolean = true): String {
     val number = this
     if (number < 0) {
         throw IllegalArgumentException("The number cannot be negative.")
@@ -60,19 +66,25 @@ fun Int.toHebrewNumeral(): String {
     if (thousands > 0 && thousands != 5) {
         val tdigits = num2digits(thousands)
         for (digit in tdigits) {
-            str += num2heb(digit)
+            str += numberToHebrew(digit)
         }
-        str += GERESH
+        if (includeGeresh) {
+            str += GERESH
+        }
     }
     val digits = num2digits(number % 1000)
     if (digits.size == 1) {
-        return "$str${num2heb(digits[0])}$GERESH"
+        return if (includeGeresh) {
+            "$str${numberToHebrew(digits[0])}$GERESH"
+        } else {
+            "$str${numberToHebrew(digits[0])}"
+        }
     }
     for ((index, digit) in digits.withIndex()) {
-        if (index == digits.lastIndex) {
+        if (index == digits.lastIndex && includeGeresh) {
             str += GERSHAYIM
         }
-        str += num2heb(digit)
+        str += numberToHebrew(digit)
     }
     return str
 }

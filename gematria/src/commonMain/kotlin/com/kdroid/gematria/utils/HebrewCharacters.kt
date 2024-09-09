@@ -23,13 +23,13 @@ internal fun isHebrewLetter(char: String): Boolean {
 /**
  * Converts an integer to its Hebrew numeric representation.
  */
-internal fun num2heb(num: Int): String {
+internal fun numberToHebrew(num: Int): String {
     return hebrewToNumMap.entries.find { it.value == num }?.key ?: "*INVALID*"
 }
 
 /**
  * Converts a Hebrew character to its corresponding numeric value.
  */
-internal fun numFromHeb(hebChar: String): Int {
+internal fun numberFromHebrew(hebChar: String): Int {
     return hebrewToNumMap[hebChar] ?: 0
 }
