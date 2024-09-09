@@ -6,7 +6,7 @@ import com.kdroid.gematria.utils.numberToHebrew
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
-private fun num2digits(number: Int): List<Int> {
+private fun numberTodigits(number: Int): List<Int> {
     val digits = mutableListOf<Int>()
     var num = number
     while (num > 0) {
@@ -64,7 +64,7 @@ fun Int.toHebrewNumeral(includeGeresh: Boolean = true): String {
     val thousands = number / 1000
     var str = ""
     if (thousands > 0 && thousands != 5) {
-        val tdigits = num2digits(thousands)
+        val tdigits = numberTodigits(thousands)
         for (digit in tdigits) {
             str += numberToHebrew(digit)
         }
@@ -72,7 +72,7 @@ fun Int.toHebrewNumeral(includeGeresh: Boolean = true): String {
             str += GERESH
         }
     }
-    val digits = num2digits(number % 1000)
+    val digits = numberTodigits(number % 1000)
     if (digits.size == 1) {
         return if (includeGeresh) {
             "$str${numberToHebrew(digits[0])}$GERESH"
