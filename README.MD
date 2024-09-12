@@ -37,11 +37,11 @@ println(dafGemara2) // Outputs: "ד:"
 ```kotlin
 val year = 5784
 val hebrewYear = year.toHebrewNumeral()
-println(hebrewYear) // Outputs: "תשפ"ד"
+println(hebrewYear) // Outputs: "ה'תשפ"ד"
 
 // Without Geresh symbols
 val hebrewYearNoSymbols = year.toHebrewNumeral(includeGeresh = false)
-println(hebrewYearNoSymbols) // Outputs: "תשפד"
+println(hebrewYearNoSymbols) // Outputs: "התשפד"
 ```
 
 ## Multiplatform Support
