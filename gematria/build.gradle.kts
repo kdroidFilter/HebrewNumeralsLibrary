@@ -1,12 +1,50 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinx.serialization)
     id("convention.publication")
+    id("maven-publish")
 }
 
 group = "com.kdroid.gematria"
-version = "0.1"
+version = "0.1.1"
+
+publishing {
+    publications {
+        // Publication pour la bibliothèque multiplateforme
+        create<MavenPublication>("maven") {
+            // Configuration des coordonnées du projet
+            groupId = project.group.toString()
+            artifactId = "gematria"
+            version = project.version.toString()
+
+            from(components["kotlin"])
+
+            pom {
+                name.set("Hebrew Numerals Library")
+                description.set("A set of Kotlin functions for working with Hebrew numerals")
+                url.set("https://github.com/kdroidFilter/HebrewNumeralsLibrary")
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            name = "reposilite"
+            url = uri("http://85.130.160.209:8080/releases")
+            credentials{
+                username = System.getenv("MAVEN_USER")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+            isAllowInsecureProtocol = true
+        }
+    }
+}
 
 kotlin {
     jvmToolchain(11)
@@ -25,6 +63,7 @@ kotlin {
         binaries.executable()
     }
 
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         binaries.executable()

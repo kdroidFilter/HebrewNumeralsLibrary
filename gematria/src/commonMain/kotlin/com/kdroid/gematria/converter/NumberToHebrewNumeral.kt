@@ -63,7 +63,7 @@ fun Int.toHebrewNumeral(includeGeresh: Boolean = true): String {
 
     val thousands = number / 1000
     var str = ""
-    if (thousands > 0 && thousands != 5) {
+    if (thousands > 0) {
         val tdigits = numberTodigits(thousands)
         for (digit in tdigits) {
             str += numberToHebrew(digit)

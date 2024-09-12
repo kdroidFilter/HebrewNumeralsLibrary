@@ -30,7 +30,7 @@ class GematriaCaculatorTest {
         )
 
         assertEquals(
-            expected = "תשפ״ה",
+            expected = "ה׳תשפ״ה",
             actual = 5785.toHebrewNumeral()
         )
     }
