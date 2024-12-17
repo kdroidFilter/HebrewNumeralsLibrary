@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.kdroidfilter:hebrewnumerals:1.0.0")
+    implementation("io.github.kdroidfilter:hebrewnumerals:0.2.0")
 }
 ```
 
@@ -63,6 +63,18 @@ val hebrewYearNoSymbols = year.toHebrewNumeral(includeGeresh = false)
 println(hebrewYearNoSymbols) // Outputs: "התשפד"
 ```
 
+### 🔤 Converting Integer to English Daf Gemara
+
+```kotlin
+val dafNumber = 5
+val englishDaf = dafNumber.toEnglishDafGemara()
+println(englishDaf) // Outputs: "4a"
+
+val dafNumber2 = 6
+val englishDaf2 = dafNumber2.toEnglishDafGemara()
+println(englishDaf2) // Outputs: "4b"
+```
+
 ## 🌐 Multiplatform Support
 
 This library is built with Kotlin Multiplatform, allowing it to be used across different platforms:
@@ -84,6 +96,10 @@ Converts an integer representing a Daf Gemara (Talmudic page) to its correspondi
 ### `Int.toHebrewNumeral(includeGeresh: Boolean = true): String`
 
 Converts an integer to its corresponding Hebrew numeral representation (Gematria).
+
+### `Int.toEnglishDafGemara(): String`
+
+Converts an integer representing a Daf Gemara to its English representation with "a" (Aleph) and "b" (Bet).
 
 ## 🛠️ Exporting as Native or JS Library
 
