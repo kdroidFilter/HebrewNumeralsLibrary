@@ -1,5 +1,6 @@
 package com.kdroid.gematria.converter
 
+import com.kdroid.gematria.utils.toDafAndAmoud
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
@@ -29,16 +30,8 @@ import kotlin.js.JsExport
 @OptIn(ExperimentalJsExport::class)
 @JsExport
 fun Int.toDafGemara(): String {
-    val dafId = this
-    if (dafId < 0) {
-        throw IllegalArgumentException("The Daf Gemara ID cannot be negative.")
-    }
-    val daf = when {
-        (dafId == 1 ) -> 2
-        (dafId % 2 == 0) -> (dafId/2) + 1
-        else -> ((dafId +1) / 2) + 1
-    }
-    val amoud = if (dafId % 2 == 1) "." else ":"
-
-    return "${daf.toHebrewNumeral(includeGeresh = false)}$amoud"
+    val (daf, amoud) = this.toDafAndAmoud()
+    val amoudSymbol = if (amoud == "a") "." else ":"
+    return "${daf.toHebrewNumeral(includeGeresh = false)}$amoudSymbol"
 }
+
