@@ -145,7 +145,7 @@ mavenPublishing {
         scm {
             connection.set("scm:git:https://github.com/kdroidFilter/HebrewNumeralsLibrary.git")
             developerConnection.set("scm:git:https://github.com/kdroidFilter/HebrewNumeralsLibrary.git")
-            url.set("https://github.com/kdroidFilter/HebrewNumeralsLibrary")
+            url.set("https://github.com/kdroidFilter/HebrewNumeralsLibrary ")
         }
     }
 
