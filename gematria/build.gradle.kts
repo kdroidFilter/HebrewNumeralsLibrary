@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinx.serialization)
-    id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.30.0"
 }
 
 group = "com.kdroid.gematria"
@@ -30,18 +30,6 @@ publishing {
     }
     repositories {
         mavenLocal()
-        maven {
-            name = "reposilite"
-            url = uri("http://85.130.160.209:8080/releases")
-            credentials{
-                username = System.getenv("MAVEN_USER")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
-            isAllowInsecureProtocol = true
-        }
     }
 }
 
