@@ -1,0 +1,33 @@
+name: Publish to Maven Central (macOS)
+
+on:
+  workflow_dispatch: # Permet de déclencher manuellement le workflow
+
+jobs:
+  publish:
+    runs-on: macos-latest # Spécifie un environnement macOS
+
+    steps:
+      # Étape 1 : Vérifier le dépôt
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Configurer Java
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17' # Remplacez par la version de Java utilisée par votre projet
+          distribution: 'temurin'
+
+      # Étape 3 : Ajouter les secrets comme variables d'environnement
+      - name: Set up environment variables
+        env:
+          ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}
+          ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}
+          ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}
+          ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}
+          ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}
+
+      # Étape 4 : Exécuter la commande Gradle
+      - name: Publish and Release to Maven Central
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
