@@ -31,6 +31,16 @@ jobs:
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}
         run: echo "Environment variables set"
 
+      - name: Verify environment variables
+        run: |
+          echo "Checking environment variables..."
+          [[ -n "${ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME}" ]] || (echo "ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME is not set" && exit 1)
+          [[ -n "${ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD}" ]] || (echo "ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD is not set" && exit 1)
+          [[ -n "${ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY}" ]] || (echo "ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY is not set" && exit 1)
+          [[ -n "${ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID}" ]] || (echo "ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID is not set" && exit 1)
+          [[ -n "${ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD}" ]] || (echo "ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD is not set" && exit 1)
+
+
       # Étape 4 : Exécuter la commande Gradle
       - name: Publish and Release to Maven Central
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
