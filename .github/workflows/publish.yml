@@ -4,33 +4,26 @@ on:
   push:
     branches:
       - master
-    tags:
-      - '**'  # Permet aussi de déclencher le workflow lors du push de tags
 
 jobs:
   publish:
-    runs-on: macos-latest
+    runs-on: macos-latest # Spécifie un environnement macOS
 
     steps:
-      # Étape 1 : Récupérer le code
-      - name: Checkout
-        uses: actions/checkout@v4
+      # Étape 1 : Vérifier le dépôt
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # Étape 2 : Installer la version de Java
+      # Étape 2 : Configurer Java
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: '17' # Remplacez par la version de Java utilisée par votre projet
+          distribution: 'temurin'
 
-      # Étape 3 : Installer Gradle (actions officielles Gradle)
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-
-
-      # Étape 5 : Publier sur Maven Central
-      - name: Publish to Maven Central
-        run: ./gradlew publishAndReleaseToMavenCentral
+      # Étape 3 : Ajouter les secrets comme variables d'environnement
+      - name: Set up environment variables
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}
           ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}
