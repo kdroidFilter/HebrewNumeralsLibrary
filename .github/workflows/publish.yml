@@ -1,7 +1,9 @@
 name: Publish to Maven Central (macOS)
 
 on:
-  workflow_dispatch: # Permet de déclencher manuellement le workflow
+  push:
+    branches:
+      - master
 
 jobs:
   publish:
