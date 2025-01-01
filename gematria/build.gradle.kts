@@ -9,7 +9,8 @@ plugins {
 }
 
 group = "com.kdroid.gematria"
-version = "0.2.1"
+version = "0.2.2"
+
 
 publishing {
     publications {
@@ -161,12 +162,5 @@ android {
 
     defaultConfig {
         minSdk = 21
-    }
-}
-
-tasks.register("printEnvVariable") {
-    doLast {
-        val envVariable = System.getenv("ORG_GRADLE_PROJECT_signingInMemoryKey")
-        println("La valeur de ORG_GRADLE_PROJECT_signingInMemoryKey est : ${envVariable ?: "non définie"}")
     }
 }

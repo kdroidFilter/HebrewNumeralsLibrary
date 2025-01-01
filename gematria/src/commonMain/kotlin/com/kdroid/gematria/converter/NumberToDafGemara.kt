@@ -27,8 +27,7 @@ import kotlin.js.JsExport
  * val dafGemara2 = 6.toDafGemara()
  * println(dafGemara2) // Outputs "ד:"
  */
-@OptIn(ExperimentalJsExport::class)
-@JsExport
+
 fun Int.toDafGemara(): String {
     val (daf, amoud) = this.toDafAndAmoud()
     val amoudSymbol = if (amoud == "a") "." else ":"
