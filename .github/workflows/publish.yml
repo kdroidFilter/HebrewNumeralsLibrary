@@ -4,47 +4,37 @@ on:
   push:
     branches:
       - master
-
-permissions:
-  contents: read
-  packages: write
+    tags:
+      - '**'  # Permet aussi de déclencher le workflow lors du push de tags
 
 jobs:
   publish:
-    runs-on: macos-latest # Spécifie un environnement macOS
+    runs-on: macos-latest
 
     steps:
-      # Étape 1 : Vérifier le dépôt
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # Étape 1 : Récupérer le code
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # Étape 2 : Configurer Java
+      # Étape 2 : Installer la version de Java
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: '17' # Remplacez par la version de Java utilisée par votre projet
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 17
 
-      # Étape 3 : Ajouter les secrets comme variables d'environnement
-      - name: Set up environment variables
+      # Étape 3 : Installer Gradle (actions officielles Gradle)
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+
+      # Étape 5 : Publier sur Maven Central
+      - name: Publish to Maven Central
+        run: ./gradlew publishAndReleaseToMavenCentral
         env:
           ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}
           ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}
-        run: echo "Environment variables set"
 
-      - name: Verify environment variables
-        run: |
-          echo "Checking environment variables..."
-          [[ -n "${ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME}" ]] || (echo "ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME is not set" && exit 1)
-          [[ -n "${ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD}" ]] || (echo "ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD is not set" && exit 1)
-          [[ -n "${ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY}" ]] || (echo "ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY is not set" && exit 1)
-          [[ -n "${ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID}" ]] || (echo "ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID is not set" && exit 1)
-          [[ -n "${ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD}" ]] || (echo "ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD is not set" && exit 1)
-
-
-      # Étape 4 : Exécuter la commande Gradle
-      - name: Publish and Release to Maven Central
-        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
