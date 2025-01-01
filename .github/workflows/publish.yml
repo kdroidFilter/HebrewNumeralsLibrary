@@ -29,6 +29,7 @@ jobs:
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}
           ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}
+        run: echo "Environment variables set"
 
       # Étape 4 : Exécuter la commande Gradle
       - name: Publish and Release to Maven Central
