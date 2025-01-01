@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.kdroidfilter:hebrewnumerals:0.2.0")
+    implementation("io.github.kdroidfilter:hebrewnumerals:0.2.1")
 }
 ```
 
@@ -108,48 +108,3 @@ The library can be easily exported for use in various environments:
 - As a native library: Can be compiled and used in C, Objective-C, and Swift projects
 - As a JavaScript library: Can be used directly in web applications or Node.js projects
 
-### 📦 Build platform artifacts
-
-#### 🤖 Android aar
-
-- Run `./gradlew :gematria:assembleRelease`
-- Output: `/gematria/build/outputs/aar/gematria-release.aar`
-
-#### ☕ JVM jar
-
-- Run `./gradlew :gematria:jvmJar`
-- Output: `/gematria/build/libs/gematria-jvm-1.0.jar`
-
-#### 🍏 iOS Framework
-
-- Run `./gradlew :gematria:linkReleaseFrameworkIosArm64`
-- Output: `/gematria/build/bin/iosArm64/releaseFramework/gematria.framework`
-
-#### 🌐 JS file
-
-- Run `./gradlew :gematria:jsBrowserProductionWebpack`
-- Output: `/gematria/build/dist/js/productionExecutable/gematria.js`
-
-#### 🍎 macOS Framework
-
-- Run `./gradlew :gematria:linkReleaseFrameworkMacosArm64`
-- Output: `/gematria/build/bin/macosArm64/releaseFramework/gematria.framework`
-
-#### 🐧 Linux static library
-
-- Run `./gradlew :gematria:linkReleaseStaticLinuxX64`
-- Output: `/gematria/build/bin/linuxX64/releaseStatic/libgematria.a`
-
-#### 🪟 Windows static library
-
-- Run `./gradlew :gematria:linkReleaseStaticMingwX64`
-- Output: `/gematria/build/bin/mingwX64/releaseStatic/libgematria.a`
-
-#### 🕸️ Wasm binary file
-
-- Run `./gradlew :gematria:wasmJsBrowserDistribution`
-- Output: `/gematria/build/dist/wasmJs/productionExecutable/gematria-wasm-js.wasm`
-
----
-
-Now available on **Maven Central**!
