@@ -12,28 +12,6 @@ group = "com.kdroid.gematria"
 version = "0.2.2"
 
 
-publishing {
-    publications {
-        // Publication pour la bibliothèque multiplateforme
-        create<MavenPublication>("maven") {
-            // Configuration des coordonnées du projet
-            groupId = project.group.toString()
-            artifactId = "gematria"
-            version = project.version.toString()
-
-            from(components["kotlin"])
-
-            pom {
-                name.set("Hebrew Numerals Library")
-                description.set("A set of Kotlin functions for working with Hebrew numerals")
-                url.set("https://github.com/kdroidFilter/HebrewNumeralsLibrary")
-            }
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
 
 kotlin {
     jvmToolchain(11)
