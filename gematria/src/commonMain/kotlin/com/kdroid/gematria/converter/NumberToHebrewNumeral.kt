@@ -3,8 +3,6 @@ package com.kdroid.gematria.converter
 import com.kdroid.gematria.utils.GERESH
 import com.kdroid.gematria.utils.GERSHAYIM
 import com.kdroid.gematria.utils.numberToHebrew
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 
 private fun numberTodigits(number: Int): List<Int> {
     val digits = mutableListOf<Int>()
@@ -53,8 +51,7 @@ private fun numberTodigits(number: Int): List<Int> {
  * val resultWithoutSymbols = 5784.toHebrewNumeral(false)
  * println(resultWithoutSymbols) // Outputs "תשפד"
  */
-@OptIn(ExperimentalJsExport::class)
-@JsExport
+
 fun Int.toHebrewNumeral(includeGeresh: Boolean = true): String {
     val number = this
     if (number < 0) {

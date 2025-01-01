@@ -2,8 +2,6 @@ package com.kdroid.gematria.converter
 
 import com.kdroid.gematria.utils.isHebrewLetter
 import com.kdroid.gematria.utils.numberFromHebrew
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 
 /**
  * Converts a Hebrew string to its corresponding numerical value (Gematria).
@@ -20,8 +18,7 @@ import kotlin.js.JsExport
  * val result = "תשפ״ד".toGematria()
  * println(result) // Outputs the integer 784
  */
-@OptIn(ExperimentalJsExport::class)
-@JsExport
+
 fun String.toGematria(): Int {
     val hebString = this
     var number = 0

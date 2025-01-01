@@ -1,8 +1,6 @@
 package com.kdroid.gematria.converter
 
 import com.kdroid.gematria.utils.toDafAndAmoud
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 
 /**
  * Converts an integer representing a Daf Gemara (Talmudic page) to its corresponding string representation.

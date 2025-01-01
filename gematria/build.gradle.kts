@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.kdroid.gematria"
-version = "0.2.2"
+version = "0.2.3"
 
 
 

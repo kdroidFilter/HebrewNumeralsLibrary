@@ -1,8 +1,6 @@
 package com.kdroid.gematria.converter
 
 import com.kdroid.gematria.utils.toDafAndAmoud
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 
 /**
  * Converts an integer representing a Daf Gemara (Talmudic page) to its corresponding English representation.
@@ -19,8 +17,7 @@ import kotlin.js.JsExport
  *
  * @throws IllegalArgumentException If the integer is negative.
  */
-@OptIn(ExperimentalJsExport::class)
-@JsExport
+
 fun Int.toEnglishDafGemara(): String {
     val (daf, amoud) = this.toDafAndAmoud()
     return "$daf$amoud"
