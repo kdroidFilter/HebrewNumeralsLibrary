@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   publish:
     runs-on: macos-latest # Spécifie un environnement macOS
