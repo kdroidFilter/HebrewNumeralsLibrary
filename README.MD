@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.kdroidfilter:hebrewnumerals:0.2.1")
+    implementation("io.github.kdroidfilter:hebrewnumerals:0.2.4")
 }
 ```
 
