@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
@@ -6,6 +7,13 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinx.serialization)
     id("com.vanniktech.maven.publish") version "0.30.0"
+    id("org.jetbrains.dokka")  version "2.0.0"
+
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    moduleName.set("Hebrew Numerals Library")
+    offlineMode.set(true)
 }
 
 group = "com.kdroid.gematria"
