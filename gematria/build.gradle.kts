@@ -17,8 +17,11 @@ tasks.withType<DokkaTask>().configureEach {
 }
 
 group = "com.kdroid.gematria"
-version = "0.2.4"
-
+val ref = System.getenv("GITHUB_REF") ?: ""
+val version = if (ref.startsWith("refs/tags/")) {
+    val tag = ref.removePrefix("refs/tags/")
+    if (tag.startsWith("v")) tag.substring(1) else tag
+} else "dev"
 
 
 kotlin {
